@@ -15,23 +15,20 @@ pub fn on2_two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
 }
 
 //run: 77.44 %
-//mem:  28.24 %
+//mem:  62.20 %
 pub fn on_two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     // build a map(value,index) with O(n)
-    let mut map: HashMap<i32, usize> = HashMap::new();
+    let mut map: HashMap<i32, i32> = HashMap::new();
 
     // search for target-n in map and retrieve indices, still O(n)
     for (i, n) in nums.iter().enumerate() {
-        if let Some(j) = map.get(&(target - n)) {
-            if i != *j {
-                return vec![i as i32, *j as i32];
-            }
+        if let Some(&j) = map.get(&(target - n)) {
+            return vec![i as i32, j];
         } else {
-            map.insert(*n, i);
+            map.insert(*n, i as i32);
         }
     }
-
-    panic!("impossible")
+    vec![]
 }
 
 pub fn less_mem_two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
